@@ -72,3 +72,19 @@ legend {
 .grid-cell {
     border: 1px solid black;
 }
+
+/* Github icon */
+footer {
+    text-align: center;
+}
+
+.fa-github {
+    color: black;
+    cursor: pointer;
+    font-size: 24px;
+    margin-top: 30px;
+}
+
+.fa-github:hover {
+    transform: scale(1.2);
+}
