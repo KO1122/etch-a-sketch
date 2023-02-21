@@ -1,6 +1,9 @@
 const grid = document.querySelector(".grid");
 const gridSize = 16;
 
+createGrid(gridSize);
+hoverBlack();
+
 function createGrid(gridSize) {
 
     grid.style["grid-template-columns"] = `repeat(${gridSize}, 1fr)`;
@@ -9,7 +12,6 @@ function createGrid(gridSize) {
         const cell = document.createElement("div");
         cell.classList.add("grid-cell");
         grid.appendChild(cell);
-
     }    
 }
 
@@ -19,33 +21,40 @@ function removeGrid() {
     }
 }
 
-// TBD - Maybe change to text or slider 
-const updateButton = document.querySelector(".button-grid-size");
-updateButton.addEventListener('click', updateGrid);
+// Adjusting the slider will change the grid size 
+// Grid size display will also be updated 
+const gridSizeDisplay = document.querySelector('.grid-size-display');
+const sliderGridSize = document.querySelector('.grid-size-slider');
+sliderGridSize.addEventListener('input', (e) => updateGridSizeDisplay(e.target.value));
+sliderGridSize.addEventListener('change', clearGrid);
 
-function updateGrid() {
-    let newSize = prompt("Please enter a new size for a n x n grid. (Maxsize is 100)");
-    // Fix error handling for strings
-    while (newSize > 100) {
-        newSize = prompt("Enter a valid size. (Max size is 100)");
-    }
-    if (!newSize) {
-        return
-    }
-    removeGrid();
-    createGrid(newSize);
-    hoverBlack();
+// Updates the default display of 16 x 16 
+function updateGridSizeDisplay (newSize){
+    gridSizeDisplay.innerText = `${newSize} x ${newSize}`;
 }
 
-// Returns grid cells to default state with white background
-const clearButton = document.querySelector(".button-clear-grid"); 
+// Clears grid cells  
+const clearButton = document.querySelector(".grid-button-clear"); 
 clearButton.addEventListener('click', clearGrid);
 
 function clearGrid() {
-    const cells = document.querySelectorAll('.grid-cell');
-    cells.forEach(cell => {
-        cell.style.removeProperty("background-color");
-    }) 
+    let newSize = sliderGridSize.value;
+    removeGrid();
+    createGrid(newSize);
+
+    // Previously used hover button will continue to apply to cleared grid 
+    if (grid.id === "hover-black") {
+        hoverBlack();
+    }
+    else if (grid.id === "hover-shade") {
+        hoverShade();
+    }
+    else if (grid.id === "hover-random") {
+        hoverRandom();
+    }
+    else if (grid.id === "hover-white") {
+        hoverWhite();
+    }
 }
 
 // Black button and functionality 
@@ -54,6 +63,7 @@ blackButton.addEventListener('click', hoverBlack);
 
 function hoverBlack() {
     const cells = document.querySelectorAll('.grid-cell');
+    grid.setAttribute("id", "hover-black");
     cells.forEach(cell => {
         cell.addEventListener('mouseover', () => {
             cell.style["background-color"] = "black";
@@ -67,11 +77,11 @@ shadeButton.addEventListener('click', hoverShade);
 
 function hoverShade() {
     const cells = document.querySelectorAll('.grid-cell');
+    grid.setAttribute("id", "hover-shade");
     cells.forEach(cell => {
         let rgbValue = 211;
         cell.addEventListener('mouseover', () => {
-
-            // If cell is gray or partially black 
+            // If cell is gray or partially black, darken the cell
             // Black has value of rgb(0,0,0)
             if (cell.style["background-color"] != "rgb(0,0,0)") {
                 cell.style["background-color"] = `rgb(${rgbValue},${rgbValue},${rgbValue})`;
@@ -87,6 +97,7 @@ randomButton.addEventListener('click', hoverRandom);
 
 function hoverRandom() {
     const cells = document.querySelectorAll('.grid-cell');
+    grid.setAttribute("id", "hover-random");
     cells.forEach(cell => {
         
         cell.addEventListener('mouseover', () => {
@@ -98,5 +109,16 @@ function hoverRandom() {
     }) 
 }
 
-createGrid(gridSize)
-hoverBlack()
+// Eraser button and functionality 
+const eraserButton = document.querySelector(".button-hover-eraser"); 
+eraserButton.addEventListener('click', hoverWhite);
+
+function hoverWhite() {
+    const cells = document.querySelectorAll('.grid-cell');
+    grid.setAttribute("id", "hover-white");
+    cells.forEach(cell => {
+        cell.addEventListener('mouseover', () => {
+            cell.style["background-color"] = "white";
+        })
+    })  
+}

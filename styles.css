@@ -1,7 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    background-color: whitesmoke;
+}
+
+header > h1 {
+    text-align: center;
+    font-size: 50px;
+    font-family: "Lobster", cursive;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: auto 0;
+}
+
+button {
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    width: 70px;
+    padding: 3px 0;
+}
+
+/* Black button */
+.button-hover-black {
+    margin-top: 5px;
+}
+
+/* Clear button */
+.grid-button-clear {
+    margin-bottom: 5px;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    gap: 15px;
+}
+
+legend {
+    text-align: center;
+    border: 1px solid black; 
+    padding: 2px 5px;
+}
+
+/* n x n grid size display */
+.grid-size {
+    text-align: center;
+}
+
 .grid {
     display: grid;
     height: 500px;
     width: 500px;
+    background-color: white;
 }
 
 .grid-cell {

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Etch-A-Sketch</title>
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
@@ -12,14 +13,28 @@
     <header>
         <h1>Etch-A-Sketch</h1>
     </header>
-    <button class="button-grid-size">Update Grid Size</button>
-    <button class="button-clear-grid">Clear</button>
-    <button class="button-hover-black">Black</button>
-    <button class="button-hover-shade">Shade</button>
-    <button class="button-hover-random">Random</button>
-    <div class="grid">
+    
+    <div class="container">
+    <div class="controls">
+    <fieldset>
+        <legend>Controls</legend>
+        <button class="button-hover-black">Black</button>
+        <button class="button-hover-shade">Shade</button>
+        <button class="button-hover-random">Random</button>
+        <button class="button-hover-eraser">Eraser</button>
+        <button class="grid-button-clear">Clear</button>
+    </fieldset>
+
+    <span class="grid-size">
+        <div class="grid-size-display">16 x 16</div>
+        <input type="range" min="1" max="100" value="16"        class="grid-size-slider">
+    </span>
+    </div>
+    
+    <div class="grid"></div>
 
     </div>
+
     <footer>
         <!-- Github Icon -->
     </footer>
